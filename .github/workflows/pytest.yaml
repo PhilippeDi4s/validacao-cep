@@ -46,7 +46,7 @@ jobs:
           username: ${{ secrets.EMAIL }}
           password: ${{ secrets.SENHAEMAIL }}
           subject: "Philippe"
-          to: "batatalouca124@gmail.com"
+          to: "lisboa.philippes@gmail.com"
           from: "Automacao GitHub Actions"
           body: "Prezado, segue em anexo o relatório de testes para validação e aceite da release."
           attachments: termo_de_aceite.html
