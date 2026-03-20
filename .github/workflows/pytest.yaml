@@ -43,8 +43,8 @@ jobs:
         with:
           server_address: smtp.gmail.com
           server_port: 465
-          username: ${{ secrets.email }}
-          password: ${{ secrets.senhamail }}
+          username: ${{ secrets.EMAIL }}
+          password: ${{ secrets.SENHAEMAIL }}
           subject: "Philippe"
           to: "batatalouca124@gmail.com"
           from: "Automacao GitHub Actions"
