@@ -1,9 +1,11 @@
 name: Testes com Pytest
+
 on: [push, pull_request]
 
 jobs:
   test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
@@ -16,35 +18,35 @@ jobs:
       - name: Instalar bibliotecas
         run: |
           pip install -r requirements.txt
-          
+
       - name: Executar Pytest
         env:
           PYTHONPATH: .
         run: pytest --cov
 
-name: Run pytest
-run: |
-  python -m pytest --junitxml=resultado_testes.xml
+      - name: Gerar XML de testes
+        run: |
+          python -m pytest --junitxml=resultado_testes.xml
 
-name: Gerar Relatorio de Aceite HTML
-run: |
-  python gera_relatorio.py
+      - name: Gerar Relatório HTML
+        run: |
+          python gera_relatorio.py
 
-name: Upload Artefato de Aceite
-uses: actions/upload-artifact@v4
-with:
-  name: Termo-de-Aceite-Final
-  path: termo_de_aceite.html
-    
-name: Enviar E-mail de Aceite
-uses: dawidd6/action-send-mail@v3
-with:
-  server_address: smtp.gmail.com
-  server_port: 465
-  username: ${{ secrets.email }}
-  password: ${{ secrets.senhamail }}
-  subject: "Philippe"
-  to: "batatalouca124@gmail.com" # Pode ser o seu e-mail para teste
-  from: "Automacao GitHub Actions"
-  body: "Prezado, segue em anexo o relatório de testes para validação e aceite da release."
-  attachments: termo_de_aceite.html # O nome do arquivo gerado pelo seu script
+      - name: Upload Artefato de Aceite
+        uses: actions/upload-artifact@v4
+        with:
+          name: Termo-de-Aceite-Final
+          path: termo_de_aceite.html
+
+      - name: Enviar E-mail de Aceite
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.email }}
+          password: ${{ secrets.senhamail }}
+          subject: "Philippe"
+          to: "batatalouca124@gmail.com"
+          from: "Automacao GitHub Actions"
+          body: "Prezado, segue em anexo o relatório de testes para validação e aceite da release."
+          attachments: termo_de_aceite.html
